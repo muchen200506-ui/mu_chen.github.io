@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>绚丽跳动变色爱心</title>
+    <style>
+        /* 基础重置 */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 页面背景设置 */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #0d0d0d; /* 使用深色背景让霓虹发光效果更惊艳 */
+            overflow: hidden;
+            font-family: sans-serif;
+        }
+
+        /* 爱心外部容器：负责变色动画和响应式大小 */
+        .heart-wrapper {
+            /* 使用 vmin 确保在手机横竖屏下都能自适应，占据屏幕合理比例 */
+            width: 45vmin; 
+            height: 45vmin;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            /* 绚丽变色动画：4秒一个轮回，平滑过渡 */
+            animation: colorChange 4s linear infinite;
+        }
+
+        /* 爱心本体：负责跳动动画和发光 */
+        .heart {
+            width: 100%;
+            height: 100%;
+            /* 初始颜色为亮粉/红色 */
+            color: #ff2a5f; 
+            /* 双重阴影制造强烈的霓虹发光感 */
+            filter: drop-shadow(0 0 15px currentColor) drop-shadow(0 0 45px currentColor);
+            
+            /* 心跳动画：模拟心脏两次跳动的节奏 */
+            animation: heartbeat 1.2s cubic-bezier(0.215, 0.610, 0.355, 1.000) infinite;
+        }
+
+        /* 让 SVG 填满容器并继承颜色 */
+        .heart svg {
+            width: 100%;
+            height: 100%;
+            fill: currentColor;
+        }
+
+        /* --- 动画关键帧 --- */
+
+        /* 1. 真实心跳动画（模拟 砰-砰-停 的节奏） */
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            15% { transform: scale(1.25); } /* 第一次大力收缩 */
+            30% { transform: scale(1); }
+            45% { transform: scale(1.15); } /* 第二次轻微收缩 */
+            60% { transform: scale(1); }
+            100% { transform: scale(1); }
+        }
+
+        /* 2. 色相旋转变色动画（遍历整个光谱） */
+        @keyframes colorChange {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="heart-wrapper">
+        <div class="heart">
+            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 28.72l-1.42-1.28C7.5 21.1 2 16.12 2 10.08 2 6.18 5.06 3.12 8.96 3.12c2.2 0 4.3 1.04 5.66 2.68 1.36-1.64 3.46-2.68 5.66-2.68 3.9 0 6.96 3.06 6.96 6.96 0 6.04-5.5 11.02-12.58 17.36L16 28.72z"/>
+            </svg>
+        </div>
+    </div>
+
+</body>
+</html>
